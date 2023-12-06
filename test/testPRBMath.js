@@ -6,29 +6,29 @@ describe("TestPRBMath", function () {
 
   // Deploy the contract before each test
   beforeEach(async function () {
-    const TestPRBMath = await ethers.getContractFactory("TestPRBMath");
+    const TestPRBMath = await ethers.getContractFactory("TestPRBMath2");
     testPrbMath = await TestPRBMath.deploy();
   });
 
-  // Test case to verify precision with base = 50, exponent = 3
-  it("Should return true for precision check with base 50 and exponent 3", async function () {
-    const base = ethers.parseUnits("50", 18); // 50 with 18 decimal places
+  // Test case to verify precision with base = 5, exponent = 3
+  it("Should return true for precision PRBMath", async function () {
+    const base = ethers.parseUnits("5", 18); // 5 with 18 decimal places
     const exponent = ethers.parseUnits("3", 18); // 3 with 18 decimal places
-    const expected = ethers.parseUnits("125000", 18); // 125000 with 18 decimal places
+    const expected = ethers.parseUnits("125", 18); // 125000 with 18 decimal places
 
-    expect(await testPrbMath.testPrecision(base, exponent, expected)).to.equal(
-      true
-    );
+    expect(
+      await testPrbMath.testPRBMathPrecision(base, exponent, expected)
+    ).to.equal(true);
   });
 
   // Test case to verify precision with base = 3, exponent = 3
-  it("Should return true for precision check with base 3 and exponent 3", async function () {
-    const base = ethers.parseUnits("3", 18); // 3 with 18 decimal places
-    const exponent = ethers.parseUnits("3", 18); // 3 with 18 decimal places
-    const expected = ethers.parseUnits("27", 18); // 27 with 18 decimal places
+  it("Should return true for precision checkLogExpMath", async function () {
+    const base = ethers.parseUnits("5", 18);
+    const exponent = ethers.parseUnits("3", 18);
+    const expected = ethers.parseUnits("125", 18);
 
-    expect(await testPrbMath.testPrecision(base, exponent, expected)).to.equal(
-      true
-    );
+    expect(
+      await testPrbMath.testLogExpMathPrecision(base, exponent, expected)
+    ).to.equal(true);
   });
 });
