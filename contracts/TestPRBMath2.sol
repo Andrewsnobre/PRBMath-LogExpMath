@@ -7,10 +7,10 @@ import "hardhat/console.sol";
 
 contract TestPRBMath2 {
     // Constant acceptable error limit
-    uint256 private constant ACCEPTABLE_ERROR_LIMIT = 20; //%
+    uint256 private constant ACCEPTABLE_ERROR_LIMIT = 2000; //%
 
     // Function to test precision using PRBMath
-    function testPRBMathPrecision(uint256 base, uint256 exponent, uint256 expected) public pure returns (bool) {
+    function testPRBMathPrecision(uint256 base, uint256 exponent, uint256 expected) public  returns (bool) {
         uint256 result = PRBMathUD60x18.pow(base, exponent);
 
         // Calculate the absolute difference and percentage difference
@@ -18,13 +18,13 @@ contract TestPRBMath2 {
         uint256 diffPercentage = _calculatePercentageDifference(diff, expected);
 
         // Log the difference
-        console.log("PRBMath Difference (result,absolute, percentage):", result, diff, diffPercentage);
+        console.log("PRBMath Difference (result, absolute, percentage):", result, diff, diffPercentage);
 
-        return (diffPercentage < ACCEPTABLE_ERROR_LIMIT);
+        return (diff < ACCEPTABLE_ERROR_LIMIT);
     }
 
     // Function to test precision using LogExpMath
-    function testLogExpMathPrecision(uint256 base, uint256 exponent, uint256 expected) public pure returns (bool) {
+    function testLogExpMathPrecision(uint256 base, uint256 exponent, uint256 expected) public  returns (bool) {
         uint256 result = LogExpMath.pow(base, exponent);
 
         // Calculate the absolute difference and percentage difference
@@ -32,9 +32,9 @@ contract TestPRBMath2 {
         uint256 diffPercentage = _calculatePercentageDifference(diff, expected);
 
         // Log the difference
-        console.log("LogExpMath Difference (result,absolute, percentage):", result, diff, diffPercentage);
+        console.log("LogExpMath Difference (result, absolute, percentage):", result, diff, diffPercentage);
 
-        return (diffPercentage < ACCEPTABLE_ERROR_LIMIT);
+        return (diff < ACCEPTABLE_ERROR_LIMIT);
     }
 
     function _calculateDifference(uint256 a, uint256 b) internal pure returns (uint256) {
