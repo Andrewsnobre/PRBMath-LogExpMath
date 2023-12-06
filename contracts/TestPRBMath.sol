@@ -7,7 +7,7 @@ import "hardhat/console.sol";
 
 contract TestPRBMath {
     function testPrecision() public view returns (bool) {
-        uint256 base = 5e18; // 50 in fixed-point notation
+        uint256 base = 5e18; // 5 in fixed-point notation
         uint256 exponent = 3e18; // 3 in fixed-point notation
 
         uint256 resultPRBMath = PRBMathUD60x18.pow(base, exponent);
