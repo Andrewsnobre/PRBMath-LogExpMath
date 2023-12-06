@@ -6,25 +6,21 @@ import "./LogExpMath.sol";
 import "hardhat/console.sol";
 
 contract TestPRBMath {
-    function testPrecision() public view returns (bool) {
-        uint256 base = 5e18; // 5 in fixed-point notation
-        uint256 exponent = 3e18; // 3 in fixed-point notation
-
+    function testPrecision(uint256 base, uint256 exponent, uint256 expected) public view returns (bool) {
         uint256 resultPRBMath = PRBMathUD60x18.pow(base, exponent);
         uint256 resultLogExpMath = LogExpMath.pow(base, exponent);
-        uint256 resultHighPrecision = 125e18; // Expected result with high precision
 
         // Calculate the absolute difference and percentage difference
-        uint256 diff = _calculateDifference(resultPRBMath, resultHighPrecision);
-        uint256 diffPercentage = _calculatePercentageDifference(diff, resultHighPrecision);
+        uint256 diff = _calculateDifference(resultPRBMath, expected);
+        uint256 diffPercentage = _calculatePercentageDifference(diff, expected);
 
-        uint256 diff2 = _calculateDifference(resultLogExpMath, resultHighPrecision);
-        uint256 diff2Percentage = _calculatePercentageDifference(diff2, resultHighPrecision);
+        uint256 diff2 = _calculateDifference(resultLogExpMath, expected);
+        uint256 diff2Percentage = _calculatePercentageDifference(diff2, expected);
 
         // Check if the difference is within an acceptable limit
-        uint256 acceptableErrorLimit = 1e16; // Set your acceptable limit
-        console.log("PRBMath Difference (absolute, percentage):", diff, diffPercentage);
-        console.log("LogExpMath Difference (absolute, percentage):", diff2, diff2Percentage);
+        uint256 acceptableErrorLimit = 1e18; // Set your acceptable limit
+        console.log("PRBMath Difference (absolute, percentage):", resultPRBMath, diff, diffPercentage);
+        console.log("LogExpMath Difference (absolute, percentage):", resultLogExpMath, diff2, diff2Percentage);
 
         return (diff < acceptableErrorLimit && diff2 < acceptableErrorLimit);
     }
