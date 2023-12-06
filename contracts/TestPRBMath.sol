@@ -7,12 +7,12 @@ import "hardhat/console.sol";
 
 contract TestPRBMath {
     function testPrecision() public view returns (bool) {
-        uint256 base = 50e18; // 50 in fixed-point notation
+        uint256 base = 5e18; // 50 in fixed-point notation
         uint256 exponent = 3e18; // 3 in fixed-point notation
 
         uint256 resultPRBMath = PRBMathUD60x18.pow(base, exponent);
         uint256 resultLogExpMath = LogExpMath.pow(base, exponent);
-        uint256 resultHighPrecision = 125000e18; // Expected result with high precision
+        uint256 resultHighPrecision = 125e18; // Expected result with high precision
 
         // Calculate the absolute difference and percentage difference
         uint256 diff = _calculateDifference(resultPRBMath, resultHighPrecision);
