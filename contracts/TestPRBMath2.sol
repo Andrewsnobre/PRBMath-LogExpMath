@@ -18,7 +18,7 @@ contract TestPRBMath2 {
         uint256 diffPercentage = _calculatePercentageDifference(diff, expected);
 
         // Log the difference
-        console.log("PRBMath Difference (result, absolute, relative error *10e-18):", result, diff, diffPercentage);
+        console.log("PRBMath Difference (result, absolute, precision *10e-18):", result, diff, diffPercentage);
 
         return (diff < ACCEPTABLE_ERROR_LIMIT);
     }
