@@ -6,7 +6,7 @@ require("hardhat-contract-sizer");
 module.exports = {
   solidity: "0.8.19",
   gasReporter: {
-    enabled: true,
+    enabled: false,
   },
   contractSizer: {
     alphaSort: true,
