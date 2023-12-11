@@ -11,9 +11,9 @@ describe("Precision test: (PRBMath x LogExpMath X PRBMathlastversion)", function
     const TestPRBMath = await ethers.getContractFactory("TestPRBMath2");
     testPrbMath = await TestPRBMath.deploy();
     // Set the values for the test
-    base = ethers.parseUnits("5", 18);
+    base = ethers.parseUnits("50", 18);
     exponent = ethers.parseUnits("3", 18);
-    expected = ethers.parseUnits("125", 18); // 2^3 = 8
+    expected = ethers.parseUnits("125000", 18);
   });
 
   it("Measures precision PRBMath function", async function () {
